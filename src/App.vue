@@ -8,8 +8,30 @@
       crossorigin="anonymous"
     />
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">Knjižnica </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Početna</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/About" class="nav-link">Login</router-link>
+            </li>
+          </div>
+        </div>
+      </nav>
     </div>
     <router-view />
   </div>
