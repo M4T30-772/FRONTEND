@@ -27,7 +27,20 @@
               <router-link to="/" class="nav-link">Početna</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/About" class="nav-link">Login</router-link>
+              <router-link to="/ListaKnjiga" class="nav-link"
+                >Lista knjiga</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/Login" class="nav-link">Login</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/Registracija" class="nav-link"
+                >Registracija</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Logout</router-link>
             </li>
           </div>
         </div>
@@ -44,17 +57,18 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #cfcece;
 }
 
 #nav {
-  padding: 30px;
+  padding: 15px;
 
   a {
     font-weight: bold;
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #c44545;
     }
   }
 }
