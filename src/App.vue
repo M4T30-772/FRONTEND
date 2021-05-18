@@ -24,23 +24,28 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <li class="nav-item">
-              <router-link to="/" class="nav-link">Početna</router-link>
+              <router-link to="/" class="nav-link">HOME</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/ListaKnjiga" class="nav-link"
-                >Lista knjiga</router-link
+                >LISTA KNJIGA</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="/Login" class="nav-link">Login</router-link>
+              <router-link to="/UnosKnjiga" class="nav-link"
+                >UNOS KNJIGA</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/Login" class="nav-link">LOGIN</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/Registracija" class="nav-link"
-                >Registracija</router-link
+                >REGISTRACIJA</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="/" class="nav-link">Logout</router-link>
+              <router-link to="/" class="nav-link">LOGOUT</router-link>
             </li>
           </div>
         </div>
