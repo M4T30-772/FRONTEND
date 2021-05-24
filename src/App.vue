@@ -7,6 +7,10 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
+    <div id="header">
+      <h2>ONLINE KNJIŽNICA LIBER</h2>
+      <p id="small">Gdje živi znanje</p>
+    </div>
     <div id="nav">
       <nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="#">Knjižnica </a>
@@ -62,19 +66,30 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #cfcece;
+  background-color: #ebebeb;
 }
 
 #nav {
   padding: 15px;
-
+  margin-top: 5px;
+  background-color: #1f5baa;
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #0e273f;
 
     &.router-link-exact-active {
-      color: #c44545;
+      color: #68a8d3;
     }
   }
+}
+#header {
+  padding: 40px;
+  text-align: left;
+  background: #1f5baa;
+  color: white;
+  font-size: 30px;
+}
+#small {
+  font-size: 25px;
 }
 </style>
