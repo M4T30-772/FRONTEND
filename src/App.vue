@@ -1,95 +1,79 @@
 <template>
   <div id="app">
-    <!-- CSS only -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-      crossorigin="anonymous"
-    />
-    <div id="header">
-      <h2>ONLINE KNJIŽNICA LIBER</h2>
-      <p id="small">Gdje živi znanje</p>
-    </div>
-    <div id="nav">
-      <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
-        <a class="navbar-brand" href="#">Knjižnica </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">HOME</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/ListaKnjiga" class="nav-link"
-                >LISTA KNJIGA</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link to="/UnosKnjiga" class="nav-link"
-                >UNOS KNJIGA</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link to="/Login" class="nav-link">LOGIN</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/Registracija" class="nav-link"
-                >REGISTRACIJA</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">LOGOUT</router-link>
-            </li>
-          </div>
-        </div>
+    <div class="navbar">
+      <img src="@/assets/liber.jpg" class="logo" />
+      <nav>
+        <ul>
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">HOME</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/ListaKnjiga" class="nav-link"
+              >LISTA KNJIGA</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link to="/UnosKnjiga" class="nav-link"
+              >UNOS KNJIGA</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link to="/Login" class="nav-link">LOGIN</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/Registracija" class="nav-link"
+              >REGISTRACIJA</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">LOGOUT</router-link>
+          </li>
+        </ul>
       </nav>
     </div>
+
     <router-view />
   </div>
 </template>
 
-<style lang="scss">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  background-color: #ebebeb;
+  height: 100vh;
+  width: 100%;
+  background-image: url("~@/assets/background.png");
+  background-position: center;
+  background-size: cover;
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+  position: relative;
 }
-
-#nav {
-  padding: 15px;
-  margin-top: 5px;
-  background-color: #1f5baa;
-  a {
-    font-weight: bold;
-    color: #0e273f;
-
-    &.router-link-exact-active {
-      color: #68a8d3;
-    }
-  }
+.navbar {
+  width: 100%;
+  height: 15vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
 }
-#header {
-  padding: 40px;
-  text-align: left;
-  background: #1f5baa;
-  color: white;
-  font-size: 30px;
+.logo {
+  width: 160px;
+  cursor: pointer;
 }
-#small {
-  font-size: 25px;
+nav {
+  flex: 1;
+  padding-left: 60px;
+}
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 0px 20px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #333;
 }
 </style>
