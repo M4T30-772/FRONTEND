@@ -12,7 +12,7 @@
       <p id="small">Gdje živi znanje</p>
     </div>
     <div id="nav">
-      <nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd;">
+      <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
         <a class="navbar-brand" href="#">Knjižnica </a>
         <button
           class="navbar-toggler"
