@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <div class="navbar">
       <img src="@/assets/liber.jpg" class="logo" />
       <nav>
@@ -18,12 +24,19 @@
             >
           </li>
           <li class="nav-item">
-            <router-link to="/Login" class="nav-link">LOGIN</router-link>
+            <router-link to="/Pisci" class="nav-link">Pisci</router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link to="/Login" class="nav-link">SIGN IN</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/Registracija" class="nav-link"
               >REGISTRACIJA</router-link
             >
+          </li>
+          <li class="nav-item">
+            <router-link to="/test" class="nav-link">test</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/" class="nav-link">LOGOUT</router-link>
@@ -58,6 +71,7 @@
   margin: auto;
   display: flex;
   align-items: center;
+  border-bottom: solid;
 }
 .logo {
   width: 160px;
@@ -74,6 +88,9 @@ nav ul li {
 }
 nav ul li a {
   text-decoration: none;
-  color: #333;
+  color: linear-gradient(to right, #9c27b0, #e040fb);
+}
+.nav-item {
+  font-size: 24px;
 }
 </style>
