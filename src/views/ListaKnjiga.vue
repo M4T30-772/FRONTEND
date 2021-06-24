@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" inline-block>
     <input
       class="form-control mr-sm-2"
       type="search"
@@ -7,6 +7,7 @@
       aria-label="Search"
       v-model="store.searchTerm"
     />
+    <!-- za trazit uredi!! -->
     <div class="row">
       <div class="col-2"></div>
       <div class="col-7">
@@ -24,36 +25,64 @@
 <script>
 import store from "./store.js";
 import generirajCard from "./generirajCard.vue";
-let cards = [];
-//kartice sa koje se prikazuju na stranici
-cards = [
-  {
-    url: "https://picsum.photos/id/1/400/400",
-    title: "Gospodar prstenova",
-    description: "opisujem knjugu prvuu",
-    time: "a malo prije",
-  },
-  {
-    url: "https://picsum.photos/id/2/400/400",
-    title: "1899",
-    description: "opisujem knjugu prvuu",
-    time: "a malo prije",
-  },
-  {
-    url: "https://picsum.photos/id/3/400/400",
-    title: "Treca knjigurina",
-    description: "opisujem knjugu trecu",
-    time: "a malo prije",
-  },
-];
-
+import { db } from "./firebase";
+let a = 5;
+//let cards = [];
 export default {
   name: "ListaKnjiga",
   data: function() {
     return {
-      cards,
+      cards: [],
       store,
     };
+  },
+  //pokaze se cim otvorimo home
+  mounted() {
+    this.getPosts();
+  },
+
+  methods: {
+    getPosts() {
+      console.log("firebase dohvat");
+      db.collection("posts")
+        .get()
+        .then((query) => {
+          this.cards = [];
+
+          fetch("http://localhost:3000/knjige")
+            .then((r) => {
+              return r.json();
+            })
+            .then((data) => {
+              console.log("podatci sa backenda", data);
+              let data2 = data.map((element) => {
+                return {
+                  id: element.id,
+                  Autor: element.Autor,
+                  Naziv: element.Naziv,
+                  Url: element.Url,
+                  Desc: element.Desc,
+                  Knjizevni_Rod: element.Knjizevni_Rod,
+                  Datum: element.Datum,
+                };
+              });
+              this.cards = data2;
+            });
+
+          //         query.forEach((doc) => {
+          //         console.log("ID", doc.id);
+          //       console.log("Podatci", doc.data());
+
+          //     this.cards.push({
+          //     id: doc.id,
+          //   posted_at: doc.posted_at,
+          // desc: doc.desc,
+          // url: doc.url,
+          // email: doc.email,
+          //  });
+          //  });
+        });
+    },
   },
   computed: {
     filteredCards() {
@@ -61,7 +90,7 @@ export default {
       let termin = this.store.searchTerm;
       let newCards = [];
       for (let card of this.cards) {
-        if (card.title.indexOf(termin) >= 0) {
+        if (card.Desc.indexOf(termin) >= 0) {
           console.log("prolaz");
           newCards.push(card);
         }
@@ -83,10 +112,11 @@ body {
 
 .main {
   background-color: #ffffff;
-  width: 900px;
-  height: 600px;
-  margin: 7em auto;
+  width: 1500px;
+  height: 760px;
+  margin: 3em auto;
   border-radius: 1.5em;
+
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 

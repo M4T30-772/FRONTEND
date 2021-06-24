@@ -27,10 +27,10 @@
             <router-link to="/Pisci" class="nav-link">Pisci</router-link>
           </li>
 
-          <li class="nav-item">
+          <li v-if="!store.currentUser" class="nav-item">
             <router-link to="/Login" class="nav-link">SIGN IN</router-link>
           </li>
-          <li class="nav-item">
+          <li v-if="!store.currentUser" class="nav-item">
             <router-link to="/Registracija" class="nav-link"
               >REGISTRACIJA</router-link
             >
@@ -38,8 +38,9 @@
           <li class="nav-item">
             <router-link to="/test" class="nav-link">test</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/" class="nav-link">LOGOUT</router-link>
+
+          <li v-if="store.currentUser" class="lo">
+            <a @click.prevent="logout()" class="nav-link">LOGOUT</a>
           </li>
         </ul>
       </nav>
@@ -48,6 +49,46 @@
     <router-view />
   </div>
 </template>
+
+<script>
+//provjera dali je user prijavljen
+import store from "./views/store.js";
+import { firebase } from "./views/firebase";
+import router from "@/router";
+firebase.auth().onAuthStateChanged((user) => {
+  const currentRoute = router.currentRoute;
+  if (user) {
+    console.log("Korinik je prijavljen u sustav: ", user.email);
+    store.currentUser = user.email;
+    if (!currentRoute.meta.needsUser) {
+      router.push({ name: "Home" });
+    }
+  } else {
+    console.log("Korisnik nije prijavljen");
+    store.currentUser = null;
+
+    if (currentRoute.meta.needsUser) {
+      router.push({ name: "Login" });
+    }
+  }
+});
+
+export default {
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => this.$router.push({ login }));
+    },
+  },
+  data: function() {
+    return {
+      store,
+    };
+  },
+};
+</script>
 
 <style>
 * {
@@ -71,7 +112,6 @@
   margin: auto;
   display: flex;
   align-items: center;
-  border-bottom: solid;
 }
 .logo {
   width: 160px;
@@ -87,10 +127,24 @@ nav ul li {
   margin: 0px 20px;
 }
 nav ul li a {
-  text-decoration: none;
-  color: linear-gradient(to right, #9c27b0, #e040fb);
+  color: #9c27b0;
 }
 .nav-item {
-  font-size: 24px;
+  font-size: 22px;
+}
+.lo {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  margin-left: 35%;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 </style>

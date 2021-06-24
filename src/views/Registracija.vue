@@ -2,23 +2,60 @@
   <div class="main">
     <p class="sign" align="center">Register</p>
     <form class="form1">
-      <input class="un " type="text" align="center" placeholder="Username" />
+      <input
+        class="un "
+        v-model="username"
+        type="text"
+        align="center"
+        placeholder="Username"
+      />
       <input
         class="pass"
+        v-model="password"
         type="password"
         align="center"
         placeholder="Password"
       />
       <input
         class="pass"
+        v-model="passwordRepeat"
         type="password"
         align="center"
         placeholder="Repeat Password"
       />
-      <a class="submit" align="center">Register</a>
+      <a class="submit" type="button" @click="signup" align="center">
+        Register
+      </a>
     </form>
   </div>
 </template>
+
+<script>
+import { firebase } from "./firebase";
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      passwordRepeat: "",
+    };
+  },
+  methods: {
+    signup() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.username, this.password)
+        .then(function() {
+          console.log("Uspješna registracija");
+        })
+        .catch(function(error) {
+          console.error("Greška u registraciji", error);
+        });
+    },
+  },
+};
+</script>
+
 <style scoped>
 body {
   background-color: #f3ebf6;
@@ -113,7 +150,7 @@ form.form1 {
   padding-top: 15px;
 }
 
-a {
+button {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: #e1bee7;
   text-decoration: none;
