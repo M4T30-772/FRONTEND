@@ -1,30 +1,102 @@
 <template>
   <div class="main">
     <p class="sign" align="center">Unos knjiga</p>
-    <form class="form1">
+    <form @submit.prevent="PostNewKnjiga" class="form1">
       <input
+        v-model="newAutor"
+        class="na"
+        type="text"
+        align="center"
+        placeholder="Naziv Autora"
+      />
+      <input
+        v-model="newNaziv"
         class="nk "
         type="text"
         align="center"
         placeholder="Naziv Knjige"
       />
-      <input class="na" type="text" align="center" placeholder="Naziv Autora" />
       <input
+        v-model="newUrl"
+        class="kv "
+        type="text"
+        align="center"
+        placeholder="URL"
+      />
+      <input
+        v-model="newDesc"
+        class="kv "
+        type="text"
+        align="center"
+        placeholder="Opis"
+      />
+      <input
+        v-model="newKnjizevni_Rod"
         class="kv "
         type="text"
         align="center"
         placeholder="Književna Vrsta"
       />
       <input
+        v-model="newAutor"
         class="do"
         type="text"
         align="center"
         placeholder="Datum Objavljivanja"
       />
-      <a class="submit" align="center">Submit</a>
+      <button type="submit" class="submit" align="center">Submit</button>
     </form>
   </div>
 </template>
+<script>
+import store from "../views/store.js";
+export default {
+  data: function() {
+    return {
+      store,
+      newAutor,
+      newNaziv,
+      newUrl,
+      newDesc,
+      newKnjizevni_Rod,
+      newDatum,
+    };
+  },
+  methods: {
+    postNewKnjiga() {
+      console.log("ok");
+      const Autor = this.newAutor;
+      const Naziv = this.newNaziv;
+      const Url = this.newUrl;
+      const Desc = this.newDesc;
+      const Knjizevni_Rod = this.newKnjizevni_Rod;
+      const Datum = this.newDatum;
+
+      db.collection("posts")
+        .add({
+          Autor: Autor,
+          Naziv: Naziv,
+          Url: Url,
+          Desc: Desc,
+          Knjizevni_Rod: Knjizevni_Rod,
+          Datum: Datum,
+        })
+        .then((doc) => {
+          console.log("Spremljeno", doc);
+          this.newAutor = "";
+          this.newNaziv = "";
+          this.newUrl = "";
+          this.newDesc = "";
+          this.newKnjizevni_Rod = "";
+          this.newDatum = "";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    },
+  },
+};
+</script>
 <style scoped>
 body {
   background-color: #f3ebf6;
@@ -34,7 +106,7 @@ body {
 .main {
   background-color: #ffffff;
   width: 900px;
-  height: 600px;
+  height: 700px;
   margin: 7em auto;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -147,6 +219,7 @@ form.form1 {
   margin-left: 44%;
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  height: 100 px;
 }
 
 .forgot {

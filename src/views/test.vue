@@ -26,6 +26,7 @@
 <script>
 import { db } from "./firebase";
 import store from "../views/store.js";
+
 export default {
   data: function() {
     return {
