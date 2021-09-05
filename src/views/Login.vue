@@ -16,7 +16,7 @@
         align="center"
         placeholder="Password"
       />
-      <a class="submit" type="button" @click="login" align="center">
+      <a class="submit" type="button" @click="login()" align="center">
         Sign in
       </a>
       <p class="forgot" align="center"><a href="#">Forgot Password?</a></p>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { firebase } from "./firebase";
+import { Auth } from "@/services";
 export default {
   name: "login",
   data() {
@@ -35,16 +35,12 @@ export default {
     };
   },
   methods: {
-    login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.username, this.password)
-        .then((result) => {
-          console.log("Uspješna prijava", result);
-        })
-        .catch(function(error) {
-          console.log("Greška u prijavi", error);
-        });
+    async login() {
+      let success = await Auth.login(this.username, this.password);
+      console.log("rezultat prijave", success);
+      if (success == true) {
+        this.$router.push({ name: "ListaKnjiga" });
+      }
     },
   },
 };

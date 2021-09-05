@@ -55,37 +55,21 @@
 import store from "./views/store.js";
 import { firebase } from "./views/firebase";
 import router from "@/router";
-firebase.auth().onAuthStateChanged((user) => {
-  const currentRoute = router.currentRoute;
-  if (user) {
-    console.log("Korinik je prijavljen u sustav: ", user.email);
-    store.currentUser = user.email;
-    if (!currentRoute.meta.needsUser) {
-      router.push({ name: "Home" });
-    }
-  } else {
-    console.log("Korisnik nije prijavljen");
-    store.currentUser = null;
-
-    if (currentRoute.meta.needsUser) {
-      router.push({ name: "Login" });
-    }
-  }
-});
+import { Auth } from "@/services";
 
 export default {
-  methods: {
-    logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => this.$router.push({ login }));
-    },
-  },
   data: function() {
     return {
       store,
+      ...store,
+      auth: Auth.state,
     };
+  },
+  methods: {
+    logout() {
+      Auth.logout();
+      this.$router.go();
+    },
   },
 };
 </script>

@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import store from "../views/store.js";
+import { Auth } from "@/services";
 Vue.use(VueRouter);
 
 const routes = [
@@ -77,12 +78,12 @@ const router = new VueRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
-  console.log("Stara ruta je", from.name, ", -> nova ruta", to.name);
-  let noUser = store.currentUser === null;
-  if (noUser && to.meta.needsUser) {
-    next("login");
-  } else {
-    next();
+  const javneStranice = ["/login", "/registracija"];
+  const loginPotreban = !javneStracnie.includes(to.path);
+  const user = Auth.getUser();
+  if (loginPotreban && !user) {
+    next("/login");
+    return;
   }
 });
 

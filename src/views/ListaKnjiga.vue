@@ -28,12 +28,14 @@ import generirajCard from "./generirajCard.vue";
 import { db } from "./firebase";
 let a = 5;
 //let cards = [];
+
 export default {
   name: "ListaKnjiga",
   data: function() {
     return {
       cards: [],
       store,
+      ...Auth.state,
     };
   },
   //pokaze se cim otvorimo home
