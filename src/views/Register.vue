@@ -1,6 +1,6 @@
 <template>
   <div class="a">
-    <p class="sign" align="center">Login</p>
+    <p class="sign" align="center">Register</p>
     <form class="form1">
       <input class="un " type="text" align="center" placeholder="Username" />
       <input
@@ -9,7 +9,13 @@
         align="center"
         placeholder="Password"
       />
-
+      <input
+        class="pass"
+        v-model="passwordRepeat"
+        type="password"
+        align="center"
+        placeholder="Repeat Password"
+      />
       <a class="submit" type="button" align="center">
         Register
       </a>
@@ -41,7 +47,7 @@ body {
 }
 
 .un {
-  width: 84%;
+  width: 76%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;
@@ -65,7 +71,7 @@ form.form1 {
 }
 
 .pass {
-  width: 84%;
+  width: 76%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;

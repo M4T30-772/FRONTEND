@@ -1,134 +1,321 @@
 <template>
-  <div id="app">
+  <div id="conteiner">
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
       crossorigin="anonymous"
     />
-    <div class="navbar">
-      <img src="@/assets/liber.jpg" class="logo" />
-      <nav>
-        <ul>
-          <li class="nav-item">
-            <router-link to="/" class="nav-link">HOME</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/ListaKnjiga" class="nav-link"
-              >LISTA KNJIGA</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link to="/UnosKnjiga" class="nav-link"
-              >UNOS KNJIGA</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link to="/Pisci" class="nav-link">Pisci</router-link>
-          </li>
 
-          <li v-if="!store.currentUser" class="nav-item">
-            <router-link to="/Login" class="nav-link">SIGN IN</router-link>
-          </li>
-          <li v-if="!store.currentUser" class="nav-item">
-            <router-link to="/Registracija" class="nav-link"
-              >REGISTRACIJA</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link to="/test" class="nav-link">test</router-link>
-          </li>
+    <div id="navigation">
+      <ul>
+        <li>
+          <span class="icon"
+            ><i class="fa fa-apple" aria-hidden="true"></i
+          ></span>
+          <router-link to="/" class="a">
+            <span class="title"><h2>Librum</h2></span>
+          </router-link>
+        </li>
 
-          <li v-if="store.currentUser" class="lo">
-            <a @click.prevent="logout()" class="nav-link">LOGOUT</a>
-          </li>
-        </ul>
-      </nav>
+        <li>
+          <span class="icon"
+            ><i class="fa fa-apple" aria-hidden="true"></i
+          ></span>
+          <router-link to="/Dashboard" class="a">
+            <span class="title">Dashboard</span>
+          </router-link>
+        </li>
+        <li>
+          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+          <router-link to="/Home" class="a">
+            <span class="title">Home</span>
+          </router-link>
+        </li>
+        <li>
+          <span class="icon"
+            ><i class="fa fa-user" aria-hidden="true"></i
+          ></span>
+          <router-link to="/ListaKnjiga" class="a">
+            <span class="title">Lista Knjiga</span>
+          </router-link>
+        </li>
+        <li>
+          <span class="icon"
+            ><i class="fa fa-comment" aria-hidden="true"></i
+          ></span>
+          <router-link to="/" class="a">
+            <span class="title">Message</span>
+          </router-link>
+        </li>
+        <li>
+          <span class="icon"
+            ><i class="fa fa-question-circle" aria-hidden="true"></i
+          ></span>
+          <router-link to="/Help" class="a">
+            <span class="title">Help</span>
+          </router-link>
+        </li>
+        <li>
+          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+          <router-link to="/" class="a">
+            <span class="title">Settings</span>
+          </router-link>
+        </li>
+        <li>
+          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+          <router-link to="/Login" class="a">
+            <span class="title">Login</span>
+          </router-link>
+        </li>
+        <li>
+          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+          <router-link to="/Register" class="a">
+            <span class="title">Register</span>
+          </router-link>
+        </li>
+
+        <li>
+          <span class="icon"
+            ><i class="fa fa-sign-out" aria-hidden="true"></i
+          ></span>
+          <router-link to="/" class="a">
+            <span class="title">Signout</span>
+          </router-link>
+        </li>
+      </ul>
     </div>
 
-    <router-view />
+    <div class="toolbar">
+      <div class="topbar">
+        <div class="toggle"></div>
+        <div class="search">
+          <label>
+            <input type="text" placeholder=" Search" />
+            <i class="fa fa-search" aria-hidden="true"> </i>
+          </label>
+        </div>
+        <div class="user"><img src="~@/assets/default.png" /></div>
+      </div>
+
+      <router-view />
+    </div>
   </div>
 </template>
-
-<script>
-//provjera dali je user prijavljen
-import store from "./views/store.js";
-import { firebase } from "./views/firebase";
-import router from "@/router";
-import { Auth } from "@/services";
-
-export default {
-  data: function() {
-    return {
-      store,
-      ...store,
-      auth: Auth.state,
-    };
-  },
-  methods: {
-    logout() {
-      Auth.logout();
-      this.$router.go();
-    },
-  },
-};
-</script>
 
 <style>
 * {
   margin: 0;
   padding: 0;
-}
-#app {
-  height: 100vh;
-  width: 100%;
-  background-image: url("~@/assets/background.png");
-  background-position: center;
-  background-size: cover;
-  padding-left: 5%;
-  padding-right: 5%;
   box-sizing: border-box;
-  position: relative;
+  font-family: "Poppins", sans-serif;
 }
-.navbar {
+body {
+  overflow-x: hidden;
+}
+.conteiner {
+  position: relative;
   width: 100%;
-  height: 15vh;
-  margin: auto;
+}
+#navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: #003147;
+  transition: 0.5s;
+  overflow: hidden;
+}
+#navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+}
+#navigation ul li:hover {
+  background: #03a9f4;
+}
+#navigation ul li:nth-child(1) {
+  margin-bottom: 20px;
+}
+#navigation ul li:nth-child(1):hover {
+  background: transparent;
+}
+#navigation ul li {
+  position: relative;
+  display: block;
+  width: 100%;
   display: flex;
+  text-decoration: none;
+  color: #fff;
+}
+#navigation .a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+}
+#navigation ul li .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+#navigation ul li .icon .fa {
+  font-size: 24px;
+  color: #fff;
+}
+#navigation ul li .a .title {
+  position: relative;
+  display: block;
+  padding: 0, 10px;
+  line-height: 60px;
+  white-space: nowrap;
+}
+/* Desno od navbara - SEARCH -  */
+.toolbar {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  background: #f5f5f5;
+  transition: 0.5s;
+}
+.toolbar .active {
+  width: calc(100%-60px);
+  left: 60px;
+}
+.toolbar .topbar {
+  width: 100%;
+  background: #fff;
+  height: 60px;
+  padding: 0 10 px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
-.logo {
-  width: 160px;
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
 }
-nav {
-  flex: 1;
-  padding-left: 60px;
+.toggle::before {
+  content: "\f0c9";
+  font-family: fontAwesome;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 60px;
+  font-size: 24;
+  text-align: center;
+  color: #111;
 }
-nav ul li {
-  display: inline-block;
-  list-style: none;
-  margin: 0px 20px;
+.search {
+  position: relative;
+  width: 400px;
+  margin: 0 10px;
 }
-nav ul li a {
-  color: #9c27b0;
+.search .label {
+  position: relative;
+  width: 100%;
 }
-.nav-item {
-  font-size: 22px;
+.search label input {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  outline: none;
+  border: 1px soid #111;
 }
-.lo {
+.search {
+  position: relative;
+  width: 400px;
+  margin: 0 10px;
+}
+.search .label {
+  position: relative;
+  width: 100%;
+}
+.search label input {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  outline: none;
+  border: 1px solid #111;
+}
+.search label .fa {
+  position: absolute;
+  left: 15px;
+  top: 11px;
+}
+.user {
+  position: relative;
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
   cursor: pointer;
-  border-radius: 5em;
-  color: #fff;
-  background: linear-gradient(to right, #9c27b0, #e040fb);
-  border: 0;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  font-family: "Ubuntu", sans-serif;
-  margin-left: 35%;
-  font-size: 13px;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
+<script>
+//provjera dali je user prijavljen
+import store from "./views/store.js";
+import { firebase } from "./views/firebase";
+import router from "@/router";
+firebase.auth().onAuthStateChanged((user) => {
+  const currentRoute = router.currentRoute;
+  if (user) {
+    console.log("Korinik je prijavljen u sustav: ", user.email);
+    store.currentUser = user.email;
+    if (!currentRoute.meta.needsUser) {
+      router.push({ name: "Home" });
+    }
+  } else {
+    console.log("Korisnik nije prijavljen");
+    store.currentUser = null;
+    if (currentRoute.meta.needsUser) {
+      router.push({ name: "Login" });
+    }
+  }
+});
+export default {
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => this.$router.push({ login }));
+    },
+  },
+  data: function() {
+    return {
+      store,
+    };
+  },
+};
+</script>

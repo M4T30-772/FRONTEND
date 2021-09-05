@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 15rem;">
+  <div class="card" style="width: 23rem;">
     <h5 class="card-title">{{ info.Naziv }}</h5>
     <img class="card-body p-0" :src="info.Url" />
     <div class="card-body">
@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import ListaKnjiga from "./ListaKnjiga.vue";
 export default {
   props: ["info"],
   name: "generirajCard",

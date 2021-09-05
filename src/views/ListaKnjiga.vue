@@ -35,7 +35,6 @@ export default {
     return {
       cards: [],
       store,
-      ...Auth.state,
     };
   },
   //pokaze se cim otvorimo home
