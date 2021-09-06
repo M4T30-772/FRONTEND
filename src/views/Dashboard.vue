@@ -3,110 +3,63 @@
     <div class="cardBox">
       <div class="card">
         <div>
-          <div class="numbers">12134</div>
-          <div class="cardName">Daily views</div>
+          <div class="cardName">Broj knjiga</div>
+          <div class="numbers">1</div>
         </div>
         <div class="iconBox">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <i class="fa fa-book" aria-hidden="true"></i>
         </div>
       </div>
       <div class="card">
         <div>
-          <div class="numbers">12</div>
-          <div class="cardName">Sales</div>
+          <div class="cardName">Korisnici</div>
+          <div class="numbers">1</div>
         </div>
         <div class="iconBox">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div class="card">
-        <div>
-          <div class="numbers">12323</div>
-          <div class="cardName">Comments</div>
-        </div>
-        <div class="iconBox">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div class="card">
-        <div>
-          <div class="numbers">4</div>
-          <div class="cardName">Nesto</div>
-        </div>
-        <div class="iconBox">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <i class="fa fa-users" aria-hidden="true"></i>
         </div>
       </div>
     </div>
     <div class="details">
       <div class="recentOrders">
         <div card="headers">
-          <h2>Recent Orders</h2>
-          <a href="#" class="btn">View All </a>
+          <h2>Posuđene knjige</h2>
+          <h3>View All</h3>
         </div>
         <table>
-          <thread
-            ><tr>
-              <td>Name</td>
-              <td>Name</td>
-              <td>Name</td>
-              <td>Name</td>
-            </tr></thread
-          >
-
           <tbody>
             <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
-            </tr>
-            <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
-            </tr>
-            <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
-            </tr>
-            <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
-            </tr>
-            <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
-            </tr>
-            <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
-            </tr>
-            <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
-            </tr>
-            <tr>
-              <td>Star</td>
-              <td>1231</td>
-              <td><span class="status del">Delivered</span></td>
+              <generiraj-posudbu />
+              <generiraj-posudbu />
+              <generiraj-posudbu />
+              <generiraj-posudbu />
+              <generiraj-posudbu />
+              <generiraj-posudbu />
+              <generiraj-posudbu />
+              <generiraj-posudbu />
+              <generiraj-posudbu />
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="recentCustomers">
-        <div class="cardHeaders">
-          <h2>Recent Customers</h2>
-        </div>
-      </div>
     </div>
   </div>
 </template>
-
+<script>
+import generirajPosudbu from "./generirajPosudbu.vue";
+import { ListaKnjiga } from "./ListaKnjiga";
+import store from "./store";
+export default {
+  components: { generirajPosudbu },
+  name: "Dashboard",
+  data() {
+    return {
+      store,
+      ListaKnjiga,
+    };
+  },
+};
+</script>
 <style>
 .cardBox {
   position: relative;

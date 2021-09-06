@@ -4,4 +4,6 @@ export default {
   cards: [],
   authenticated: false,
   userEmail: "fake@email.com",
+  autor: "",
+  naziv: "",
 };

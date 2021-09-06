@@ -17,65 +17,58 @@
       <ul>
         <li>
           <span class="icon"
-            ><i class="fa fa-apple" aria-hidden="true"></i
+            ><i class="fa fa-book" aria-hidden="true"></i
           ></span>
-          <router-link to="/" class="a">
+          <router-link to="/ListaKnjiga" class="a">
             <span class="title"><h2>Librum</h2></span>
           </router-link>
         </li>
-
         <li>
           <span class="icon"
-            ><i class="fa fa-apple" aria-hidden="true"></i
+            ><i class="fa fa-home" aria-hidden="true"></i
           ></span>
-          <router-link to="/Dashboard" class="a">
-            <span class="title">Dashboard</span>
-          </router-link>
-        </li>
-        <li>
-          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
           <router-link to="/Home" class="a">
             <span class="title">Home</span>
           </router-link>
         </li>
         <li>
           <span class="icon"
-            ><i class="fa fa-user" aria-hidden="true"></i
+            ><i class="fa fa-dashboard" aria-hidden="true"></i
+          ></span>
+          <router-link to="/Dashboard" class="a">
+            <span class="title">Dashboard</span>
+          </router-link>
+        </li>
+
+        <li>
+          <span class="icon"
+            ><i class="fa fa-book" aria-hidden="true"></i
           ></span>
           <router-link to="/ListaKnjiga" class="a">
             <span class="title">Lista Knjiga</span>
           </router-link>
         </li>
+
         <li>
           <span class="icon"
-            ><i class="fa fa-comment" aria-hidden="true"></i
+            ><i class="fa fa-upload" aria-hidden="true"></i
           ></span>
-          <router-link to="/" class="a">
-            <span class="title">Message</span>
+          <router-link to="/NovaKnjiga" class="a">
+            <span class="title">Nova Knjiga</span>
           </router-link>
         </li>
         <li>
           <span class="icon"
-            ><i class="fa fa-question-circle" aria-hidden="true"></i
+            ><i class="fa fa-sign-in" aria-hidden="true"></i
           ></span>
-          <router-link to="/Help" class="a">
-            <span class="title">Help</span>
-          </router-link>
-        </li>
-        <li>
-          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
-          <router-link to="/" class="a">
-            <span class="title">Settings</span>
-          </router-link>
-        </li>
-        <li>
-          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
           <router-link to="/Login" class="a">
             <span class="title">Login</span>
           </router-link>
         </li>
         <li>
-          <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+          <span class="icon"
+            ><i class="fa fa-address-card" aria-hidden="true"></i
+          ></span>
           <router-link to="/Register" class="a">
             <span class="title">Register</span>
           </router-link>
@@ -97,7 +90,11 @@
         <div class="toggle"></div>
         <div class="search">
           <label>
-            <input type="text" placeholder=" Search" />
+            <input
+              v-model="store.searchTerm"
+              type="text"
+              placeholder=" Search"
+            />
             <i class="fa fa-search" aria-hidden="true"> </i>
           </label>
         </div>
@@ -287,22 +284,8 @@ body {
 import store from "./views/store.js";
 import { firebase } from "./views/firebase";
 import router from "@/router";
-firebase.auth().onAuthStateChanged((user) => {
-  const currentRoute = router.currentRoute;
-  if (user) {
-    console.log("Korinik je prijavljen u sustav: ", user.email);
-    store.currentUser = user.email;
-    if (!currentRoute.meta.needsUser) {
-      router.push({ name: "Home" });
-    }
-  } else {
-    console.log("Korisnik nije prijavljen");
-    store.currentUser = null;
-    if (currentRoute.meta.needsUser) {
-      router.push({ name: "Login" });
-    }
-  }
-});
+import generirajCard from "./views/generirajCard.vue";
+
 export default {
   methods: {
     logout() {
@@ -316,6 +299,23 @@ export default {
     return {
       store,
     };
+  },
+  computed: {
+    filteredCards() {
+      //search bar
+      let termin = this.store.searchTerm;
+      let newCards = [];
+      for (let card of this.cards) {
+        if (card.Desc.indexOf(termin) >= 0) {
+          console.log("prolaz");
+          newCards.push(card);
+        }
+      }
+      return newCards;
+    },
+  },
+  components: {
+    generirajCard,
   },
 };
 </script>

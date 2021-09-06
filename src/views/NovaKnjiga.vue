@@ -1,26 +1,89 @@
 <template>
   <div class="a">
-    <p class="sign" align="center">Register</p>
+    <p class="sign" align="center">Unesite novu knjigu</p>
     <form class="form1">
-      <input class="un " type="text" align="center" placeholder="Username" />
       <input
+        v-model="autor"
+        class="un"
+        type="text"
+        align="center"
+        placeholder="Autor"
+      />
+      <input
+        v-model="naziv"
         class="pass"
         type="password"
         align="center"
-        placeholder="Password"
+        placeholder="Naziv knjige"
       />
       <input
-        class="pass"
-        type="password"
+        v-model="url"
+        class="un"
+        type="text"
         align="center"
-        placeholder="Repeat Password"
+        placeholder="URL"
       />
-      <a class="submit" type="button" align="center">
+      <input
+        v-model="desc"
+        class="un"
+        type="text"
+        align="center"
+        placeholder="Opis"
+      />
+      <input
+        v-model="knjizevni_rod"
+        class="un"
+        type="text"
+        align="center"
+        placeholder="Književni rod"
+      />
+      <input
+        v-model="datum"
+        class="un"
+        type="text"
+        align="center"
+        placeholder="Godina objavljivanja"
+      />
+      <a @click="postNovaKnjiga()" class="submit" type="button" align="center">
         Register
       </a>
     </form>
   </div>
 </template>
+
+<script>
+import { NovaKnjiga } from "@/services";
+
+export default {
+  data() {
+    return {
+      autor: "",
+      naziv: "",
+      url: "",
+      desc: "",
+      knjizevni_rod: "",
+      datum: "",
+    };
+  },
+  methods: {},
+  name: "NovaKnjiga",
+  methods: {
+    postNovaKnjiga() {
+      let NovaKnjigaVue = {
+        Autor: this.autor,
+        Naziv: this.naziv,
+        Url: this.url,
+        Desc: this.desc,
+        Knjizevni_Rod: this.knjizevni_rod,
+        Datum: this.datum,
+      };
+      NovaKnjiga.create(NovaKnjigaVue).then(() => {
+        this.$router.push({ name: "ListaKnjiga" });
+      });
+    },
+  },
+};
+</script>
 
 <style scoped>
 body {
@@ -46,7 +109,7 @@ body {
 }
 
 .un {
-  width: 76%;
+  width: 84%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;
@@ -70,7 +133,7 @@ form.form1 {
 }
 
 .pass {
-  width: 76%;
+  width: 84%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;

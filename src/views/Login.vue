@@ -2,7 +2,7 @@
   <div class="a">
     <p class="sign" align="center">Login</p>
     <form class="form1">
-      <input class="un " type="text" align="center" placeholder="Username" />
+      <input class="un" type="text" align="center" placeholder="Username" />
       <input
         class="pass"
         type="password"
@@ -10,12 +10,31 @@
         placeholder="Password"
       />
 
-      <a class="submit" type="button" align="center">
+      <a @click="login()" class="submit" type="button" align="center">
         Register
       </a>
     </form>
   </div>
 </template>
+
+<script>
+import { Auth } from "@/services";
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    async login() {
+      console.log("JA RADIM");
+      let success = await Auth.login(this.username, this.password);
+      console.log("rezultat prijave", success);
+    },
+  },
+};
+</script>
 
 <style scoped>
 body {
