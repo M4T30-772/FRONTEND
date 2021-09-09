@@ -47,7 +47,7 @@
 </template>
 <script>
 import generirajPosudbu from "./generirajPosudbu.vue";
-import { ListaKnjiga } from "./ListaKnjiga";
+
 import store from "./store";
 export default {
   components: { generirajPosudbu },
@@ -55,7 +55,6 @@ export default {
   data() {
     return {
       store,
-      ListaKnjiga,
     };
   },
 };

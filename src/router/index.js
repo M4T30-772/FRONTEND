@@ -10,12 +10,10 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-    meta: {
-      needsUser: true,
-    },
   },
+
   {
-    path: "/login",
+    path: "/Login",
     name: "Login",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -51,16 +49,6 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ListaKnjiga.vue"),
   },
-  ,
-  {
-    path: "/Pisci",
-    name: "Pisci",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Pisci.vue"),
-  },
   {
     path: "/Dashboard",
     name: "Dashboard",
@@ -76,6 +64,18 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const javneStranice = ["/Login", "/Register"];
+  const loginPotreban = !javneStranice.includes(to.path);
+  const user = Auth.getUser();
+
+  if (loginPotreban && !user) {
+    next("/Login");
+    return;
+  }
+  next();
 });
 
 export default router;

@@ -57,7 +57,7 @@
             <span class="title">Nova Knjiga</span>
           </router-link>
         </li>
-        <li>
+        <li v-if="!auth.authenticated">
           <span class="icon"
             ><i class="fa fa-sign-in" aria-hidden="true"></i
           ></span>
@@ -65,21 +65,20 @@
             <span class="title">Login</span>
           </router-link>
         </li>
-        <li>
+        <li v-if="!auth.authenticated">
           <span class="icon"
             ><i class="fa fa-address-card" aria-hidden="true"></i
           ></span>
-          <router-link to="/Register" class="a">
+          <router-link v-if="!auth.authenticated" to="/Register" class="a">
             <span class="title">Register</span>
           </router-link>
         </li>
-
-        <li>
+        <li v-if="auth.authenticated">
           <span class="icon"
             ><i class="fa fa-sign-out" aria-hidden="true"></i
           ></span>
           <router-link to="/" class="a">
-            <span class="title">Signout</span>
+            <span @click="logout()" class="title">Signout</span>
           </router-link>
         </li>
       </ul>
@@ -87,7 +86,6 @@
 
     <div class="toolbar">
       <div class="topbar">
-        <div class="toggle"></div>
         <div class="search">
           <label>
             <input
@@ -105,6 +103,45 @@
     </div>
   </div>
 </template>
+
+<script>
+//provjera dali je user prijavljen
+import store from "./views/store.js";
+import router from "@/router";
+import generirajCard from "./views/generirajCard.vue";
+import { Auth } from "@/services/index.js";
+export default {
+  methods: {
+    logout() {
+      Auth.logout();
+      this.$router.go();
+    },
+  },
+  data: function() {
+    return {
+      store,
+      auth: Auth.state,
+    };
+  },
+  computed: {
+    filteredCards() {
+      //search bar
+      let termin = this.store.searchTerm;
+      let newCards = [];
+      for (let card of this.cards) {
+        if (card.Desc.indexOf(termin) >= 0) {
+          console.log("prolaz");
+          newCards.push(card);
+        }
+      }
+      return newCards;
+    },
+  },
+  components: {
+    generirajCard,
+  },
+};
+</script>
 
 <style>
 * {
@@ -222,6 +259,7 @@ body {
 }
 .search {
   position: relative;
+
   width: 400px;
   margin: 0 10px;
 }
@@ -235,6 +273,7 @@ body {
   border-radius: 40px;
   padding: 5px 20px;
   padding-left: 35px;
+  margin-left: 10px;
   outline: none;
   border: 1px soid #111;
 }
@@ -260,7 +299,9 @@ body {
   position: absolute;
   left: 15px;
   top: 11px;
+  margin-left: 10px;
 }
+
 .user {
   position: relative;
   min-width: 50px;
@@ -279,43 +320,3 @@ body {
   object-fit: cover;
 }
 </style>
-<script>
-//provjera dali je user prijavljen
-import store from "./views/store.js";
-import { firebase } from "./views/firebase";
-import router from "@/router";
-import generirajCard from "./views/generirajCard.vue";
-
-export default {
-  methods: {
-    logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => this.$router.push({ login }));
-    },
-  },
-  data: function() {
-    return {
-      store,
-    };
-  },
-  computed: {
-    filteredCards() {
-      //search bar
-      let termin = this.store.searchTerm;
-      let newCards = [];
-      for (let card of this.cards) {
-        if (card.Desc.indexOf(termin) >= 0) {
-          console.log("prolaz");
-          newCards.push(card);
-        }
-      }
-      return newCards;
-    },
-  },
-  components: {
-    generirajCard,
-  },
-};
-</script>

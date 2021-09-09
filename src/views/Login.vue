@@ -2,8 +2,15 @@
   <div class="a">
     <p class="sign" align="center">Login</p>
     <form class="form1">
-      <input class="un" type="text" align="center" placeholder="Username" />
       <input
+        v-model="username"
+        class="un"
+        type="text"
+        align="center"
+        placeholder="Username"
+      />
+      <input
+        v-model="password"
         class="pass"
         type="password"
         align="center"
@@ -11,7 +18,7 @@
       />
 
       <a @click="login()" class="submit" type="button" align="center">
-        Register
+        Prijava
       </a>
     </form>
   </div>
@@ -29,8 +36,14 @@ export default {
   methods: {
     async login() {
       console.log("JA RADIM");
+
       let success = await Auth.login(this.username, this.password);
       console.log("rezultat prijave", success);
+      if ((success = true)) {
+        this.$router.push({
+          name: "ListaKnjiga",
+        });
+      }
     },
   },
 };

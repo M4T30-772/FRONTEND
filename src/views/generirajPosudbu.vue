@@ -1,5 +1,5 @@
 <template>
-  <div class="posudba">Knjiga, {{ store.userEmail }}</div>
+  <div class="posudba">{{ store.userEmail }} je posudio : Knjiga,</div>
 </template>
 
 <script>

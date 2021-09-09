@@ -10,7 +10,7 @@
           :info="card"
         />
       </div>
-      <div class="col-2">desno {{ store.searchTerm }}</div>
+      <div class="col-2">desno {{ store.searchTerm }} {{ cards[0] }}</div>
     </div>
   </div>
 </template>
@@ -35,6 +35,9 @@ export default {
   },
 
   methods: {
+    Posudba() {
+      console.log("radim");
+    },
     getPosts() {
       fetch("http://localhost:3000/knjige")
         .then((r) => {

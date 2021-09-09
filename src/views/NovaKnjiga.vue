@@ -11,8 +11,8 @@
       />
       <input
         v-model="naziv"
-        class="pass"
-        type="password"
+        class="un"
+        type="text"
         align="center"
         placeholder="Naziv knjige"
       />
@@ -109,7 +109,7 @@ body {
 }
 
 .un {
-  width: 84%;
+  width: 95%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;
@@ -168,7 +168,8 @@ form.form1 {
   padding-bottom: 10px;
   padding-top: 10px;
   font-family: "Ubuntu", sans-serif;
-  margin-left: 35%;
+  margin-left: 47%;
+
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }

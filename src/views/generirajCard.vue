@@ -4,26 +4,31 @@
     <img class="card-body" :src="info.Url" />
     <div class="card-body">
       <p class="card-text">{{ info.Knjizevni_Rod }},{{ info.Desc }}</p>
-      <a @click="posudi()" class="button">Posudi</a>
+      <a class="button" @click="Posudba()"> Posudi</a>
     </div>
   </div>
 </template>
 
 <script>
 let brojac = 0;
+import { NovaPosudba } from "@/services";
+import store from "./store";
 export default {
   props: ["info"],
   name: "generirajCard",
   data() {
-    return {};
+    return {
+      store,
+    };
   },
   methods: {
-    posudi() {
-      {
-        {
-          //napuni u bazi posudbu??
-        }
-      }
+    Posudba() {
+      let posudba = {
+        username: store.userEmail,
+        naziv: store.cards.Naziv,
+      };
+      console.log(posudba);
+      console.log("Radim");
     },
   },
 };
