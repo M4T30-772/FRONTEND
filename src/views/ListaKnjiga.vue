@@ -1,5 +1,5 @@
 <template>
-  <div class="main" inline-block>
+  <div class="test" inline-block>
     <!-- za trazit uredi!! -->
     <div class="row">
       <div class="col-2"></div>
@@ -10,7 +10,7 @@
           :info="card"
         />
       </div>
-      <div class="col-2">desno {{ store.searchTerm }} {{ cards[0] }}</div>
+      <div class="col-2"></div>
     </div>
   </div>
 </template>

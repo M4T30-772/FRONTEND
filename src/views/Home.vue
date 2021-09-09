@@ -6,7 +6,10 @@
   </div>
 </template>
 
-<style>
+<style scoped>
+* {
+  background-color: white;
+}
 .mainHome {
   padding: 10px 0 0 0px;
 }

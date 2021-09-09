@@ -19,15 +19,15 @@
           <span class="icon"
             ><i class="fa fa-book" aria-hidden="true"></i
           ></span>
-          <router-link to="/ListaKnjiga" class="a">
-            <span class="title"><h2>Librum</h2></span>
+          <router-link to="/" class="a">
+            <span class="title"><h2>LIBRUM</h2></span>
           </router-link>
         </li>
         <li>
           <span class="icon"
             ><i class="fa fa-home" aria-hidden="true"></i
           ></span>
-          <router-link to="/Home" class="a">
+          <router-link to="/" class="a">
             <span class="title">Home</span>
           </router-link>
         </li>
@@ -78,7 +78,9 @@
             ><i class="fa fa-sign-out" aria-hidden="true"></i
           ></span>
           <router-link to="/" class="a">
-            <span @click="logout()" class="title">Signout</span>
+            <span @click="logout()" class="title"
+              >Signout -> {{ auth.userEmail }}
+            </span>
           </router-link>
         </li>
       </ul>
@@ -91,14 +93,15 @@
             <input
               v-model="store.searchTerm"
               type="text"
-              placeholder=" Search"
+              placeholder="Search"
             />
             <i class="fa fa-search" aria-hidden="true"> </i>
           </label>
         </div>
-        <div class="user"><img src="~@/assets/default.png" /></div>
+        <div class="user">
+          <img src="~@/assets/default.png" />
+        </div>
       </div>
-
       <router-view />
     </div>
   </div>
@@ -110,6 +113,7 @@ import store from "./views/store.js";
 import router from "@/router";
 import generirajCard from "./views/generirajCard.vue";
 import { Auth } from "@/services/index.js";
+
 export default {
   methods: {
     logout() {
@@ -137,6 +141,11 @@ export default {
       return newCards;
     },
   },
+  mounted() {
+    let externalScript = document.createElement("script");
+    externalScript.setAttribute("src", "https://smtpjs.com/v3/smtp.js");
+    document.head.appendChild(externalScript);
+  },
   components: {
     generirajCard,
   },
@@ -153,6 +162,7 @@ export default {
 body {
   overflow-x: hidden;
 }
+
 .conteiner {
   position: relative;
   width: 100%;
@@ -218,6 +228,9 @@ body {
   padding: 0, 10px;
   line-height: 60px;
   white-space: nowrap;
+}
+h2 {
+  padding-top: 8px;
 }
 /* Desno od navbara - SEARCH -  */
 .toolbar {
@@ -301,7 +314,9 @@ body {
   top: 11px;
   margin-left: 10px;
 }
-
+.p {
+  background-color: important blue;
+}
 .user {
   position: relative;
   min-width: 50px;

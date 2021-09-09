@@ -4,7 +4,7 @@
       <div class="card">
         <div>
           <div class="cardName">Broj knjiga</div>
-          <div class="numbers">1</div>
+          <div class="numbers">9</div>
         </div>
         <div class="iconBox">
           <i class="fa fa-book" aria-hidden="true"></i>
@@ -13,7 +13,7 @@
       <div class="card">
         <div>
           <div class="cardName">Korisnici</div>
-          <div class="numbers">1</div>
+          <div class="numbers">10</div>
         </div>
         <div class="iconBox">
           <i class="fa fa-users" aria-hidden="true"></i>
@@ -23,43 +23,33 @@
     <div class="details">
       <div class="recentOrders">
         <div card="headers">
-          <h2>Posuđene knjige</h2>
-          <h3>View All</h3>
+          <h2><b>POSUĐENE KNJIGE</b></h2>
+          <p></p>
+          <p></p>
+          <div class="skup">
+            <generiraj-posudbu
+              v-for="card in filteredCards"
+              :key="card.naziv"
+              :info="card"
+            />
+          </div>
         </div>
-        <table>
-          <tbody>
-            <tr>
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-              <generiraj-posudbu />
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
 </template>
-<script>
-import generirajPosudbu from "./generirajPosudbu.vue";
 
-import store from "./store";
-export default {
-  components: { generirajPosudbu },
-  name: "Dashboard",
-  data() {
-    return {
-      store,
-    };
-  },
-};
-</script>
 <style>
+.recentOrders {
+  background-color: #fff;
+  margin: 30px;
+}
+h2 {
+  text-align: center;
+}
+h3 {
+  text-align: center;
+}
 .cardBox {
   position: relative;
   width: 100%;
@@ -92,3 +82,56 @@ export default {
   margin: 0;
 }
 </style>
+
+<script>
+import generirajPosudbu from "./generirajPosudbu.vue";
+
+import store from "./store";
+export default {
+  components: { generirajPosudbu },
+  name: "Dashboard",
+  data() {
+    return {
+      store,
+      cards: [],
+    };
+  },
+  mounted() {
+    this.getDashboard();
+  },
+  methods: {
+    getDashboard() {
+      fetch("http://localhost:3000/dashboard")
+        .then((r) => {
+          return r.json();
+        })
+        .then((data) => {
+          console.log("podatci sa backenda", data);
+          let data2 = data.map((element) => {
+            return {
+              id: element._id,
+              autor: element.autor,
+              naziv: element.naziv,
+              username: element.username,
+            };
+          });
+          this.cards = data2;
+        });
+    },
+  },
+  computed: {
+    filteredCards() {
+      //search bar
+      let termin = this.store.searchTerm;
+      let newCards = [];
+      for (let card of this.cards) {
+        if (card.id.indexOf(termin) >= 0) {
+          console.log("prolaz");
+          newCards.push(card);
+        }
+      }
+      return newCards;
+    },
+  },
+};
+</script>

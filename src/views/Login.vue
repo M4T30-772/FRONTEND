@@ -70,10 +70,11 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: bold;
   font-size: 23px;
+  margin-left: 5%;
 }
 
 .un {
-  width: 84%;
+  width: 95%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;
@@ -97,7 +98,7 @@ form.form1 {
 }
 
 .pass {
-  width: 84%;
+  width: 95%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;
@@ -135,6 +136,7 @@ form.form1 {
   margin-left: 35%;
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin-left: 47%;
 }
 
 .forgot {

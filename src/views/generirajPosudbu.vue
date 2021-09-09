@@ -1,5 +1,10 @@
 <template>
-  <div class="posudba">{{ store.userEmail }} je posudio : Knjiga,</div>
+  <div class="posudba">
+    <div class="first">
+      Korisnik: {{ this.info.username }} je posudio:{{ info.naziv }} od
+      {{ info.autor }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -10,7 +15,18 @@ export default {
   data() {
     return {
       store,
+      cards: [],
     };
   },
 };
 </script>
+
+<style scoped>
+* {
+  margin: 10px;
+  background: #fff;
+}
+.first {
+  font-size: 20px;
+}
+</style>

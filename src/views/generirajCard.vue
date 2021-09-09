@@ -3,32 +3,39 @@
     <h5 class="card-title">{{ info.Naziv }}</h5>
     <img class="card-body" :src="info.Url" />
     <div class="card-body">
+      <h3>{{ info.Autor }}</h3>
       <p class="card-text">{{ info.Knjizevni_Rod }},{{ info.Desc }}</p>
-      <a class="button" @click="Posudba()"> Posudi</a>
+      <a class="button" @click="init()"> Posudi</a>
     </div>
   </div>
 </template>
 
 <script>
 let brojac = 0;
-import { NovaPosudba } from "@/services";
 import store from "./store";
+import { Auth, Dashboard } from "@/services";
 export default {
   props: ["info"],
   name: "generirajCard",
   data() {
     return {
       store,
+      auth: Auth.state,
+      autor: "",
+      username: "",
+      naziv: "",
     };
   },
   methods: {
-    Posudba() {
-      let posudba = {
-        username: store.userEmail,
-        naziv: store.cards.Naziv,
+    init() {
+      let noviDash = {
+        autor: this.info.Autor,
+        naziv: this.info.Naziv,
+        username: this.auth.userEmail,
       };
-      console.log(posudba);
-      console.log("Radim");
+      Dashboard.create(noviDash).then(() => {
+        alert("Posudili ste knjigu");
+      });
     },
   },
 };

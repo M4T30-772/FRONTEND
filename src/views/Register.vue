@@ -2,8 +2,15 @@
   <div class="a">
     <p class="sign" align="center">Register</p>
     <form class="form1">
-      <input class="un " type="text" align="center" placeholder="Username" />
       <input
+        v-model="username"
+        class="un "
+        type="text"
+        align="center"
+        placeholder="Username"
+      />
+      <input
+        v-model="password"
         class="pass"
         type="password"
         align="center"
@@ -15,12 +22,41 @@
         align="center"
         placeholder="Repeat Password"
       />
-      <a class="submit" type="button" align="center">
+      <a
+        @click="postRegisterUser()"
+        class="submit"
+        type="button"
+        align="center"
+      >
         Register
       </a>
     </form>
   </div>
 </template>
+
+<script>
+import { Register } from "@/services";
+
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    postRegisterUser() {
+      let NoviUser = {
+        username: this.username,
+        password: this.password,
+      };
+      Register.create(NoviUser).then(() => {
+        //this.$router.push({ name: "Login" });
+      });
+    },
+  },
+};
+</script>
 
 <style scoped>
 body {
@@ -43,10 +79,11 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: bold;
   font-size: 23px;
+  margin-left: 5%;
 }
 
 .un {
-  width: 76%;
+  width: 95%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;
@@ -70,7 +107,7 @@ form.form1 {
 }
 
 .pass {
-  width: 76%;
+  width: 95%;
   color: rgb(38, 50, 56);
   font-weight: 700;
   font-size: 14px;
@@ -105,9 +142,9 @@ form.form1 {
   padding-bottom: 10px;
   padding-top: 10px;
   font-family: "Ubuntu", sans-serif;
-  margin-left: 35%;
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin-left: 47%;
 }
 
 .forgot {
