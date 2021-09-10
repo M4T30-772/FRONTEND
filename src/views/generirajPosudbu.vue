@@ -2,7 +2,7 @@
   <div class="posudba">
     <div class="first">
       Korisnik: {{ this.info.username }} je posudio:{{ info.naziv }} od
-      {{ info.autor }}
+      {{ info.autor }} -> PDF: {{ info.pdf }}
     </div>
   </div>
 </template>

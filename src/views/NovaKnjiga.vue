@@ -44,8 +44,15 @@
         align="center"
         placeholder="Godina objavljivanja"
       />
+      <input
+        v-model="pdf"
+        class="un"
+        type="text"
+        align="center"
+        placeholder="PDF knjige"
+      />
       <a @click="postNovaKnjiga()" class="submit" type="button" align="center">
-        Register
+        Unos nove knjige
       </a>
     </form>
   </div>
@@ -63,6 +70,7 @@ export default {
       desc: "",
       knjizevni_rod: "",
       datum: "",
+      pdf: "",
     };
   },
   methods: {},
@@ -76,6 +84,7 @@ export default {
         Desc: this.desc,
         Knjizevni_Rod: this.knjizevni_rod,
         Datum: this.datum,
+        Pdf: this.pdf,
       };
       NovaKnjiga.create(NovaKnjigaVue).then(() => {
         this.$router.push({ name: "ListaKnjiga" });

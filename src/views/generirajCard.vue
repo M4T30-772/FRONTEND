@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h5 class="card-title">{{ info.Naziv }}</h5>
-    <img class="card-body" :src="info.Url" />
+    <div class="img-container"><img class="card-body" :src="info.Url" /></div>
     <div class="card-body">
       <h3>{{ info.Autor }}</h3>
       <p class="card-text">{{ info.Knjizevni_Rod }},{{ info.Desc }}</p>
@@ -24,6 +24,7 @@ export default {
       autor: "",
       username: "",
       naziv: "",
+      pdf: "",
     };
   },
   methods: {
@@ -32,6 +33,7 @@ export default {
         autor: this.info.Autor,
         naziv: this.info.Naziv,
         username: this.auth.userEmail,
+        pdf: this.info.Pdf,
       };
       Dashboard.create(noviDash).then(() => {
         alert("Posudili ste knjigu");
@@ -42,6 +44,14 @@ export default {
 </script>
 
 <style>
+img {
+  max-width: 50%;
+  height: auto;
+  align-content: center;
+}
+.img-container {
+  text-align: center;
+}
 .card-title {
   font-size: 30px;
   text-align: center;

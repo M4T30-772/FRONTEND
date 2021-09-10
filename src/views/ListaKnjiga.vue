@@ -3,7 +3,7 @@
     <!-- za trazit uredi!! -->
     <div class="row">
       <div class="col-2"></div>
-      <div class="col-7">
+      <div class="col-6">
         <generirajCard
           v-for="card in filteredCards"
           :key="card.url"
@@ -54,6 +54,7 @@ export default {
               Desc: element.Desc,
               Knjizevni_Rod: element.Knjizevni_Rod,
               Datum: element.Datum,
+              Pdf: element.Pdf,
             };
           });
           this.cards = data2;

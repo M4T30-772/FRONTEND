@@ -7,6 +7,7 @@ export default {
   autor: "",
   naziv: "",
   username: "",
+  pdf: "",
   data() {
     return {
       Auth: Auth.state,

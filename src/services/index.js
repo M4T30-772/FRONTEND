@@ -36,6 +36,7 @@ let NovaKnjiga = {
       Desc: data.Desc,
       Knjizevni_Rod: data.Knjizevni_Rod,
       Datum: data.Datum,
+      pdf: data.pdf,
     };
 
     console.log("Spremam na backend", data);
@@ -63,6 +64,7 @@ let Dashboard = {
       naziv: data.naziv,
       username: data.username,
       datum: Date.now(),
+      pdf: data.pdf,
     };
     console.log("Spremam na backend", data);
     Service.post("/dashboard", serverData);

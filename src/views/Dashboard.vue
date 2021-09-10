@@ -29,7 +29,7 @@
           <div class="skup">
             <generiraj-posudbu
               v-for="card in filteredCards"
-              :key="card.naziv"
+              :key="card._id"
               :info="card"
             />
           </div>
@@ -113,6 +113,7 @@ export default {
               autor: element.autor,
               naziv: element.naziv,
               username: element.username,
+              pdf: element.pdf,
             };
           });
           this.cards = data2;

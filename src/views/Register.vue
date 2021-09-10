@@ -51,7 +51,7 @@ export default {
         password: this.password,
       };
       Register.create(NoviUser).then(() => {
-        //this.$router.push({ name: "Login" });
+        this.$router.push({ name: "Login" });
       });
     },
   },
@@ -79,7 +79,7 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: bold;
   font-size: 23px;
-  margin-left: 5%;
+  margin-left: 0%;
 }
 
 .un {

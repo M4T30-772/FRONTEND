@@ -70,7 +70,7 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: bold;
   font-size: 23px;
-  margin-left: 5%;
+  margin-left: 0%;
 }
 
 .un {
